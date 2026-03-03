@@ -1,0 +1,227 @@
+/* ══════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════ */
+
+.footer {
+  background: #8B1A1A;
+  position: relative;
+  padding-top: 3rem;
+}
+
+/* ── Scroll-to-top button sits on the curve at the top-right ── */
+.scrollTop {
+  position: absolute;
+  top: -20px;
+  right: 5vw;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #8B1A1A;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: background 0.2s, transform 0.2s;
+  z-index: 10;
+}
+
+.scrollTop:hover {
+  background: #6e1515;
+  transform: translateY(-2px);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5vw 2.5rem;
+}
+
+/* ══════════════════════════════════════════
+   TOP ROW — logo | nav | help
+   ══════════════════════════════════════════ */
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem 0 2rem;
+}
+
+/* ── Logo ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  height: 28px;
+  width: auto;
+  /* Keep logo white on the dark red background */
+  filter: brightness(0) invert(1);
+}
+
+.logoFallback {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+/* ── Nav links ── */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.navLink {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: #fff;
+}
+
+/* ── Help and Support ── */
+.help {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.help:hover {
+  color: #fff;
+}
+
+/* ══════════════════════════════════════════
+   DIVIDER
+   ══════════════════════════════════════════ */
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.5rem;
+}
+
+/* ══════════════════════════════════════════
+   BOTTOM ROW — copyright | socials
+   ══════════════════════════════════════════ */
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.copy {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
+.copyLink {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.copyLink:hover {
+  color: #fff;
+}
+
+/* Socials */
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-shrink: 0;
+}
+
+.socialLabel {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-right: 0.25rem;
+  white-space: nowrap;
+}
+
+.socialBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.socialBtn:hover {
+  border-color: #fff;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 860px) {
+  .top {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .nav {
+    order: 3;
+    flex: none;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .help {
+    margin-left: auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .footer    { padding-top: 2.5rem; }
+
+  .top       { gap: 1.25rem; }
+
+  .nav       { gap: 1rem; }
+
+  .navLink   { font-size: 0.82rem; }
+
+  .bottom    { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+  .socials   { align-self: flex-start; }
+}

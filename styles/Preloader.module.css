@@ -1,0 +1,113 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: #6B0F0F;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.lines span {
+  flex: 1;
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.circle {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1);
+}
+
+.content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.tagline {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  clip-path: inset(0 100% 0 0);
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  clip-path: inset(0 100% 0 0);
+}
+
+.counter {
+  position: absolute;
+  bottom: 8vh;
+  right: 6vw;
+  text-align: right;
+  font-family: 'Syne', sans-serif;
+}
+
+.counterNumber {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  color: #fff;
+  display: block;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.counter p {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 0.25rem;
+}
+
+.barTrack {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.2), #fff);
+}
+
+.curtainTop,
+.curtainBottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #6B0F0F;
+  z-index: 5;
+}
+
+.curtainTop { top: 0; transform-origin: top; }
+.curtainBottom { bottom: 0; transform-origin: bottom; }

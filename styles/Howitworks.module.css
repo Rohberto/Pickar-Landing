@@ -1,0 +1,176 @@
+/* ══════════════════════════════════════════
+   HOW IT WORKS
+   ══════════════════════════════════════════ */
+
+.section {
+  padding: 7rem 0;
+  background: #fff;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+/* ── HEADER: label+title left | divider line right ── */
+.head {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+.headLeft {
+  flex-shrink: 0;
+}
+
+.label {
+  font-size: 0.82rem;
+  color: var(--gray, #888);
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.label strong {
+  color: #8B1A1A;
+  font-weight: 700;
+}
+
+.title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: var(--black, #111);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Horizontal divider — GSAP animates scaleX 0→1 */
+.line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(139,26,26,0.25), rgba(139,26,26,0.06));
+  transform-origin: left center;
+  /* Start hidden — GSAP scales it in */
+  transform: scaleX(0);
+  margin-bottom: 0.4rem; /* aligns with title baseline */
+}
+
+/* ══════════════════════════════════════════
+   CARDS GRID
+   ══════════════════════════════════════════ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 2rem 1.75rem;
+  position: relative;
+  cursor: default;
+  /* transition for non-GSAP states */
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.card:hover {
+  border-color: rgba(139, 26, 26, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
+}
+
+/* ── Icon ── */
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(139, 26, 26, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* ── Card text ── */
+.cardTitle {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--black, #111);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.65rem;
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: var(--gray, #888);
+  line-height: 1.72;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+
+/* Laptop */
+@media (max-width: 1024px) {
+  .grid { gap: 1.25rem; }
+  .card { padding: 1.75rem 1.5rem; }
+}
+
+/* Tablet — 2 columns */
+@media (max-width: 860px) {
+  .section { padding: 5rem 0; }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Line goes full width below the title on tablet */
+  .line {
+    width: 100%;
+    flex: none;
+    margin-bottom: 0;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* Mobile — 1 column */
+@media (max-width: 560px) {
+  .section { padding: 4rem 0; }
+
+  .head { margin-bottom: 2.5rem; }
+
+  .title { white-space: normal; }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card { padding: 1.5rem 1.25rem; border-radius: 16px; }
+
+  .iconWrap { width: 46px; height: 46px; border-radius: 12px; margin-bottom: 1.25rem; }
+  .icon     { width: 24px; height: 24px; }
+
+  .cardTitle { font-size: 1rem; }
+  .cardDesc  { font-size: 0.855rem; }
+}

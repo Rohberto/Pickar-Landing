@@ -1,0 +1,484 @@
+/* ══════════════════════════════════════════
+   HERO — matches Hero.png reference design
+   ══════════════════════════════════════════ */
+
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(155deg, #7a0f0f 0%, #8B1A1A 45%, #6e0e0e 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: 60px;
+  opacity: 0; /* GSAP animates to 1 after preloader */
+}
+
+/* ── Top-right decorative half-circle glow (visible in screenshot) ── */
+.topOrb {
+  position: absolute;
+  width: 680px;
+  height: 680px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 38% 38%,
+    rgba(185, 45, 45, 0.5) 0%,
+    rgba(145, 22, 22, 0.28) 45%,
+    transparent 70%
+  );
+  top: -220px;
+  right: -180px;
+  pointer-events: none;
+}
+
+
+/* ══════════════════════════════════════════
+   NAVBAR
+   ══════════════════════════════════════════ */
+
+
+
+/* ══════════════════════════════════════════
+   MAIN INNER GRID
+   ══════════════════════════════════════════ */
+
+.inner {
+  flex: 1;
+  display: grid;
+  /* Give text column much more breathing room */
+  grid-template-columns: 600px 1fr;
+  align-items: center;
+  gap: 2rem;
+  /* Bottom padding reserves room for the curved SVG overlay */
+  padding: 1rem 5vw 10rem;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+/* ══════════════════════════════════════════
+   LEFT TEXT COLUMN
+   ══════════════════════════════════════════ */
+
+.left {
+  position: relative;
+  z-index: 2;
+}
+
+/* overflow:hidden is critical — it clips the GSAP y:130 slide-up */
+.heading {
+  overflow: hidden;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(4.5rem, 8vw, 8.5rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+  margin-bottom: 2rem;
+}
+
+.heading .heroLine {
+  display: block;
+  will-change: transform;
+}
+
+.sub {
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.75;
+  margin-bottom: 2.8rem;
+  max-width: 360px;
+}
+
+.sub strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+
+/* ══════════════════════════════════════════
+   STORE BUTTONS
+   ══════════════════════════════════════════ */
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.storeBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #0f0f0f;
+  color: #fff;
+  padding: 0.78rem 1.35rem;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.18s;
+  cursor: none;
+  min-width: 158px;
+}
+
+.storeBtn:hover {
+  background: #1c1c1c;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.storeBtnText {
+  text-align: left;
+  line-height: 1.25;
+}
+
+.storeBtnText small {
+  display: block;
+  font-size: 0.6rem;
+  opacity: 0.5;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.storeBtnText strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+
+/* ══════════════════════════════════════════
+   PHONES — RIGHT COLUMN
+   3 phones: main (front-left) > earnings (middle) > map (far-right, cropped)
+   ══════════════════════════════════════════ */
+
+.phones {
+  position: relative;
+  height: 640px;
+  /* Clip the tops of phones 1 & 3 that hang above the container */
+  overflow: visible;
+  /* Align phones to the bottom of the container so they "sit" on the curve */
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Shared base for all three phone <img> tags */
+.phoneImg {
+  position: absolute;
+  object-fit: contain;
+  filter: drop-shadow(0 28px 55px rgba(0, 0, 0, 0.5))
+          drop-shadow(0 6px 18px rgba(0, 0, 0, 0.3));
+  will-change: transform;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─── Phone 1: Main dashboard ───────────────────────────
+   Pushed DOWN — top is cut off, bottom aligns with section
+*/
+.phoneMain {
+  width: 280px;
+  height: auto;
+  left: 0;
+  /* Push down so roughly top 80px is cropped by the section */
+  bottom: -60px;
+  z-index: 3;
+}
+
+/* ─── Phone 2: Earnings ─────────────────────────────────
+   Sits higher — fully visible, center of attention
+*/
+.phoneEarnings {
+  width: 255px;
+  height: auto;
+  left: 230px;
+  /* Sits higher than the other two — top is fully visible */
+  bottom: 20px;
+  z-index: 2;
+}
+
+/* ─── Phone 3: Map ──────────────────────────────────────
+   Pushed DOWN like phone 1 — top cut off, bleeds right edge
+*/
+.phoneMap {
+  width: 230px;
+  height: auto;
+  left: 445px;
+  /* Same treatment as phone 1 — pushed down */
+  bottom: -60px;
+  z-index: 1;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4))
+          drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+
+/* ══════════════════════════════════════════
+   CURVED BOTTOM TRANSITION
+   ══════════════════════════════════════════ */
+
+.curveWrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 130px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.curveSvg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* White circular button sitting on the wave crest */
+.scrollArrow {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  color: #8B1A1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  pointer-events: all;
+  transition: box-shadow 0.2s, transform 0.2s;
+  z-index: 10;
+}
+
+.scrollArrow:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.26);
+  transform: translateX(-50%) scale(1.1);
+}
+
+
+/* ══════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ══════════════════════════════════════════ */
+
+/* Large desktop */
+@media (min-width: 1400px) {
+  .phoneMain     { width: 300px; }
+  .phoneEarnings { width: 275px; left: 250px; }
+  .phoneMap      { width: 250px; left: 475px; }
+}
+
+/* Medium desktop / laptop */
+@media (max-width: 1200px) {
+  .inner { grid-template-columns: 440px 1fr; }
+
+  .phoneMain     { width: 240px; }
+  .phoneEarnings { width: 218px; left: 195px; }
+  .phoneMap      { width: 200px; left: 375px; }
+  .phones        { height: 560px; }
+}
+
+/* Small desktop */
+@media (max-width: 1024px) {
+  .inner { grid-template-columns: 380px 1fr; }
+
+  .phoneMain     { width: 210px; }
+  .phoneEarnings { width: 192px; left: 170px; }
+  .phoneMap      { width: 175px; left: 330px; }
+  .phones        { height: 500px; }
+}
+
+/* ── TABLET (portrait + landscape) ─────────────────────*/
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    /* Push content below the fixed navbar height */
+    padding-top: 2rem;
+    padding-bottom: 14rem;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sub { margin: 0 0 2rem; max-width: 520px; }
+
+  .buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .storeBtn {
+    width: 100%;
+    justify-content: center;
+    min-width: unset;
+    padding: 1rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  /* Phones: tall container, all 3 spread across full width */
+  .phones {
+    width: 100%;
+    /* Tall enough to show phones with depth effect */
+    height: 68vw;
+    max-height: 500px;
+    margin: 0;
+    /* Clip the bottoms that hang below, keep tops visible */
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Reset absolute positions to percentage-based */
+  .phoneMain {
+    width: 34%;
+    left: 1%;
+    bottom: -12%;
+    /* Stronger shadow to pop against red bg */
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6))
+            drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+  }
+
+  .phoneEarnings {
+    width: 34%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 4%;
+    filter: drop-shadow(0 24px 48px rgba(0,0,0,0.65))
+            drop-shadow(0 6px 16px rgba(0,0,0,0.45));
+  }
+
+  .phoneMap {
+    width: 34%;
+    right: 1%;
+    left: auto;
+    bottom: -12%;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6))
+            drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+  }
+}
+
+/* ── MOBILE (up to 640px) ──────────────────────────────*/
+@media (max-width: 640px) {
+  /* Navbar sits above everything — ensure heading clears it */
+.hero{
+    justify-content: center;
+    padding-top: 80px;
+}
+
+  .inner {
+    /* Add top padding = approx navbar height so heading isn't hidden */
+    padding-top: 1rem;
+    padding-bottom: 15rem;
+    gap: 2rem;
+  }
+
+  .heading {
+    /* Responsive but never so big it overlaps navbar */
+    font-size: clamp(3.2rem, 16vw, 4.8rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .sub {
+    font-size: 1rem;
+    max-width: 100%;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .storeBtn {
+    width: 100%;
+    justify-content: center;
+    min-width: unset;
+    padding: 1rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .storeBtnText small  { font-size: 0.65rem; }
+  .storeBtnText strong { font-size: 1.05rem; }
+
+  /* Phones: taller container on mobile for more visual impact */
+  .phones {
+    width: 100%;
+    height: 75vw;
+    max-height: 420px;
+    overflow: hidden;
+  }
+
+  /* Bigger on mobile — they need to pop */
+  .phoneMain {
+    width: 37%;
+    left: 0%;
+    bottom: -10%;
+    filter: drop-shadow(0 18px 36px rgba(0,0,0,0.65))
+            drop-shadow(0 4px 10px rgba(0,0,0,0.45));
+  }
+
+  .phoneEarnings {
+    width: 37%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5%;
+    filter: drop-shadow(0 22px 44px rgba(0,0,0,0.7))
+            drop-shadow(0 6px 14px rgba(0,0,0,0.5));
+  }
+
+  .phoneMap {
+    width: 37%;
+    right: 0%;
+    left: auto;
+    bottom: -10%;
+    filter: drop-shadow(0 18px 36px rgba(0,0,0,0.65))
+            drop-shadow(0 4px 10px rgba(0,0,0,0.45));
+  }
+}
+
+/* ── VERY SMALL (< 400px — iPhone SE, Galaxy A etc.) ───*/
+@media (max-width: 400px) {
+  .heading { font-size: clamp(2.8rem, 17vw, 3.8rem); }
+
+  .inner { padding-bottom: 16rem; }
+
+  .phones {
+    height: 80vw;
+    max-height: 360px;
+  }
+
+  /* 2 phones only — main left, earnings right, map hidden */
+  .phoneMain {
+    width: 48%;
+    left: 1%;
+    bottom: -8%;
+  }
+
+  .phoneEarnings {
+    width: 48%;
+    left: auto;
+    right: 1%;
+    transform: none;
+    bottom: 4%;
+  }
+
+  .phoneMap { display: none; }
+}

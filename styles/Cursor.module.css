@@ -1,0 +1,44 @@
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: #8B1A1A;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  will-change: transform;
+}
+
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #8B1A1A;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0.6;
+  will-change: transform;
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+
+.dot.hover {
+  width: 12px;
+  height: 12px;
+  background: #C0392B;
+}
+
+.ring.hover {
+  width: 56px;
+  height: 56px;
+  opacity: 0.3;
+}
+
+@media (hover: none) {
+  .dot, .ring { display: none; }
+}
