@@ -248,7 +248,7 @@
     gap: 20px;
   }
   .left {
-    margin-top: 20px;
+    margin-top: 10px;
     align-items: center;
     text-align: center;
   }
@@ -271,7 +271,7 @@
 
   .inner { padding: 20px 5vw 0; gap: 14px; }
 
-  .phones { height: 260px; align-items: flex-start; margin-top: -200px; }
+  .phones { height: 260px; align-items: flex-start; margin-top: -120px; }
   .phoneMain     { height: 232px; left: 50%; margin-left: -122px; }
   .phoneEarnings { height: 210px; left: 50%; margin-left: -36px;  }
   .phoneMap      { height: 188px; left: 50%; margin-left:  40px;  }
