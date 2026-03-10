@@ -1,0 +1,55 @@
+/* ══════════════════════════════════════════
+   SIGNUP MODAL OVERLAY
+   ══════════════════════════════════════════ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 10, 10, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Close button — top-right corner of overlay, outside card */
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s;
+}
+.closeBtn:hover { background: rgba(255, 255, 255, 0.22); }
+
+/* Card just sizes + positions — SignupForm owns its own look */
+.card {
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  scrollbar-width: none;
+}
+.card::-webkit-scrollbar { display: none; }
+
+@media (max-width: 480px) {
+  .overlay { padding: 0; align-items: flex-end; }
+  .card {
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: 20px 20px 0 0;
+  }
+}

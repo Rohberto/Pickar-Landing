@@ -1,17 +1,18 @@
 /* styles/globals.css */
 :root {
-  --red: #8B1A1A;
-  --red-dark: #6B0F0F;
-  --red-mid: #A52020;
-  --red-bright: #C0392B;
-  --cream: #FDF8F5;
-  --cream-dark: #F5EDE8;
-  --white: #FFFFFF;
-  --black: #0A0A0A;
-  --gray: #6B6B6B;
-  --light-gray: #ECECEC;
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Cabinet Grotesk', sans-serif;
+  --red:         #8B1A1A;
+  --red-dark:    #6B0F0F;
+  --red-mid:     #A52020;
+  --red-bright:  #C0392B;
+  --cream:       #FDF8F5;
+  --cream-dark:  #F5EDE8;
+  --white:       #FFFFFF;
+  --black:       #0A0A0A;
+  --gray:        #6B6B6B;
+  --light-gray:  #ECECEC;
+
+  --font-display: 'Archivo', sans-serif;   /* headings */
+  --font-body:    'Roboto', sans-serif;     /* body text */
 }
 
 *, *::before, *::after {
@@ -20,9 +21,7 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
@@ -48,7 +47,6 @@ img {
   padding: 0 5vw;
 }
 
-/* Utility */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -68,16 +66,9 @@ body::after {
   opacity: 0.4;
 }
 
-/* Section spacing */
-section {
-  position: relative;
-}
+section { position: relative; }
 
-/* Reveal animation base state */
-.reveal-text {
-  overflow: hidden;
-}
-
+.reveal-text { overflow: hidden; }
 .reveal-text span {
   display: block;
   transform: translateY(110%);

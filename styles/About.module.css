@@ -34,13 +34,14 @@
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
   color: #8B1A1A;
   font-weight: 600;
   margin-bottom: 0.75rem;
 }
 
 .title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-size: clamp(1.9rem, 4vw, 2.8rem);
   font-weight: 800;
   color: var(--black);
@@ -52,6 +53,7 @@
   color: var(--gray);
   line-height: 1.8;
   font-size: 0.975rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* ══════════════════════════════════════════
@@ -170,7 +172,7 @@
 }
 
 .featureTitle {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--black);

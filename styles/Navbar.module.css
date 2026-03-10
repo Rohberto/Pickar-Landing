@@ -61,7 +61,7 @@
 
 /* Text fallback (shown if image errors) */
 .logoText {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 800;
   color: #fff;
@@ -317,7 +317,7 @@
 }
 
 .drawerLogo span {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 800;
   color: #fff;
@@ -347,7 +347,7 @@
   color: rgba(255, 255, 255, 0.85);
   font-size: 1.05rem;
   font-weight: 600;
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-display);
   letter-spacing: -0.01em;
   transition: color 0.2s, padding-left 0.2s;
 }
@@ -447,4 +447,259 @@
 
   .logoImg  { height: 24px; }
   .logoText { font-size: 1.1rem; }
+}
+
+
+/* ══════════════════════════════════════════
+   NAV RIGHT — wraps avatar OR help button
+   ══════════════════════════════════════════ */
+
+.navRight {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Avatar button ── */
+.avatarWrap {
+  position: relative;
+}
+
+.avatarBtn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.22);
+  border-radius: 100px;
+  padding: 5px 12px 5px 5px;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.2s, border-color 0.2s;
+}
+.avatarBtn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.4);
+}
+.scrolled .avatarBtn {
+  background: rgba(139,26,26,0.07);
+  border-color: rgba(139,26,26,0.22);
+  color: #8B1A1A;
+}
+.scrolled .avatarBtn:hover {
+  background: rgba(139,26,26,0.13);
+}
+
+/* Circle with initials */
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.chevron {
+  transition: transform 0.22s ease;
+}
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown ── */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 240px;
+  background: #1a0505;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  overflow: hidden;
+  z-index: 400;
+  animation: dropIn 0.2s ease;
+}
+.dropdownScrolled {
+  background: #fff;
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* User info row at top of dropdown */
+.dropUser {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+}
+
+.dropAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.dropInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+.dropInfo strong {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dropInfo span {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dropdownScrolled .dropInfo strong { color: #0A0A0A; }
+.dropdownScrolled .dropInfo span   { color: #999; }
+
+.dropDivider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 0;
+}
+.dropdownScrolled .dropDivider { background: rgba(0,0,0,0.06); }
+
+/* Dropdown items */
+.dropItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 16px;
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+}
+.dropItem:hover {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+.dropdownScrolled .dropItem { color: #444; }
+.dropdownScrolled .dropItem:hover { background: #f5f5f5; color: #0A0A0A; }
+
+.dropLogout { color: rgba(255,100,100,0.85); }
+.dropLogout:hover { background: rgba(255,80,80,0.08) !important; color: #ff6464 !important; }
+.dropdownScrolled .dropLogout { color: #c0392b; }
+.dropdownScrolled .dropLogout:hover { background: rgba(192,57,43,0.06) !important; color: #8B1A1A !important; }
+
+/* ══════════════════════════════════════════
+   DRAWER — user info + logout
+   ══════════════════════════════════════════ */
+
+.drawerUser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0 20px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.drawerScrolled .drawerUser {
+  border-bottom-color: rgba(0,0,0,0.07);
+}
+
+.drawerAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.drawerUserInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+.drawerUserInfo strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.drawerUserInfo span {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.drawerScrolled .drawerUserInfo strong { color: #0A0A0A; }
+.drawerScrolled .drawerUserInfo span   { color: #999; }
+
+.drawerLogout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2rem;
+  padding: 0.85rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,100,100,0.25);
+  color: rgba(255,100,100,0.85);
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+}
+.drawerLogout:hover {
+  background: rgba(255,80,80,0.08);
+  color: #ff7070;
+}
+.drawerScrolled .drawerLogout {
+  border-color: rgba(139,26,26,0.2);
+  color: #c0392b;
+}
+.drawerScrolled .drawerLogout:hover {
+  background: rgba(192,57,43,0.06);
+}
+
+@media (max-width: 900px) {
+  .navRight { display: none; }
+  .hamburger { display: flex; }
 }
