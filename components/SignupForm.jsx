@@ -173,7 +173,7 @@ function OTPInput({ value, onChange }) {
   );
 }
 
-export default function SignupForm() {
+export default function SignupForm({ onSuccess, onSwitchToLogin }) {
   const [step, setStep] = useState(1);
   const [userType, setUserType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -286,6 +286,7 @@ export default function SignupForm() {
         localStorage.setItem("pickar_user", JSON.stringify(userData));
         window.dispatchEvent(new Event("pickar_auth"));
         setStep(4);
+        if (onSuccess) setTimeout(onSuccess, 1800);
       } else {
         setOtpError(data.message || "Invalid OTP");
       }
@@ -309,18 +310,11 @@ export default function SignupForm() {
   };
 
   const handleLogin = () => {
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.src = "pickar://auth/login";
-    document.body.appendChild(iframe);
-    setTimeout(() => {
-      document.body.removeChild(iframe);
-      window.location.href = "/login";
-    }, 1500);
+    if (onSwitchToLogin) onSwitchToLogin();
   };
 
   if (step === 1) return (
-    <div className={styles.card}>
+    <div className={styles.formInner}>
       <h2 className={styles.cardTitle}>How do you want to register?</h2>
 
       <div className={styles.typeGrid}>
@@ -363,6 +357,11 @@ export default function SignupForm() {
         Register
       </button>
 
+      <p className={styles.loginRow}>
+        Already have an account?{" "}
+        <button type="button" className={styles.loginLink} onClick={handleLogin}>Login</button>
+      </p>
+
       <p className={styles.terms}>
         By creating an account, you understand and agree to our{" "}
         <a href="/terms" className={styles.termsLink}>Terms of Service</a>
@@ -373,7 +372,7 @@ export default function SignupForm() {
   );
 
   if (step === 2) return (
-    <div className={styles.card}>
+    <div className={styles.formInner}>
       <button type="button" className={styles.backBtn} onClick={() => setStep(1)}>
         <BackIcon />
       </button>
@@ -401,6 +400,11 @@ export default function SignupForm() {
         {loading ? <span className={styles.spinner} /> : "Create Account"}
       </button>
 
+      <p className={styles.loginRow}>
+        Already have an account?{" "}
+        <button type="button" className={styles.loginLink} onClick={handleLogin}>Login</button>
+      </p>
+
       <p className={styles.terms}>
         By creating an account, you understand and agree to our{" "}
         <a href="/terms" className={styles.termsLink}>Terms of Service</a>
@@ -411,7 +415,7 @@ export default function SignupForm() {
   );
 
   if (step === 3) return (
-    <div className={styles.card}>
+    <div className={styles.formInner}>
       <button type="button" className={styles.backBtn} onClick={() => setStep(2)}>
         <BackIcon />
       </button>
@@ -453,7 +457,7 @@ export default function SignupForm() {
   );
 
   return (
-    <div className={styles.card}>
+    <div className={styles.formInner}>
       <div className={styles.successWrap}>
         <div className={styles.successIcon}>
           <CheckIcon />

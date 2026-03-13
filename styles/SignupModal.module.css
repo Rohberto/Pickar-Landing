@@ -41,9 +41,17 @@
   max-height: 90vh;
   overflow-y: auto;
   border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  padding: 24px 24px 0;
   scrollbar-width: none;
 }
 .card::-webkit-scrollbar { display: none; }
+
+/* Holds the SignupForm or LoginForm — they add their own bottom padding */
+.formWrap {
+  margin: 0 -24px;
+}
 
 @media (max-width: 480px) {
   .overlay { padding: 0; align-items: flex-end; }
@@ -51,5 +59,37 @@
     max-width: 100%;
     max-height: 92vh;
     border-radius: 20px 20px 0 0;
+    padding: 20px 20px 0;
   }
+  .formWrap { margin: 0 -20px; }
+}
+
+
+/* ── Tab switcher ── */
+.tabs {
+  display: flex;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 20px;
+  gap: 4px;
+}
+
+.tab {
+  flex: 1;
+  padding: 9px 0;
+  border: none;
+  background: transparent;
+  border-radius: 9px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+}
+
+.tabActive {
+  background: #fff;
+  color: #8B1A1A;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
