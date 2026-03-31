@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
+import { useRouter } from "next/router";
 import styles from "../styles/SignupForm.module.css";
 
 const API = "https://theosophically-uncoaxal-gussie.ngrok-free.dev/api";
@@ -145,12 +146,12 @@ function OTPInput({ value, onChange }) {
       const next = [...digits];
       next[i] = "";
       onChange(next.join(""));
-      if (i > 0) inputs.current[i - 1] && inputs.current[i - 1].focus();
+      if (i > 0 && inputs.current[i - 1]) inputs.current[i - 1].focus();
     } else if (/^\d$/.test(e.key)) {
       const next = [...digits];
       next[i] = e.key;
       onChange(next.join(""));
-      if (i < 3) inputs.current[i + 1] && inputs.current[i + 1].focus();
+      if (i < 3 && inputs.current[i + 1]) inputs.current[i + 1].focus();
     }
   };
 
@@ -174,6 +175,7 @@ function OTPInput({ value, onChange }) {
 }
 
 export default function SignupForm({ onSuccess, onSwitchToLogin }) {
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const [userType, setUserType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -195,7 +197,7 @@ export default function SignupForm({ onSuccess, onSwitchToLogin }) {
   });
 
   const setField = (key) => (e) => setForm(f => ({ ...f, [key]: e.target.value }));
-  const setVal = (key) => (val) => setForm(f => ({ ...f, [key]: val }));
+  const setVal   = (key) => (val) => setForm(f => ({ ...f, [key]: val }));
 
   const validate = () => {
     const e = {};
@@ -262,7 +264,7 @@ export default function SignupForm({ onSuccess, onSwitchToLogin }) {
       } else {
         setErrors({ _api: response.message || "Registration failed" });
       }
-    } catch (err) {
+    } catch {
       setErrors({ _api: "Network error. Please check your connection." });
     } finally {
       setLoading(false);
@@ -281,12 +283,27 @@ export default function SignupForm({ onSuccess, onSwitchToLogin }) {
       });
       const data = await res.json();
       if (data.success) {
-        if (data.data && data.data.token) localStorage.setItem("authToken", data.data.token);
-        const userData = { fullName: form.fullName, email: form.email };
+        const token = data.data && data.data.token ? data.data.token : "";
+        if (token) localStorage.setItem("authToken", token);
+
+        const userData = {
+          fullName:   data.data && data.data.user ? data.data.user.fullName  : form.fullName,
+          email:      data.data && data.data.user ? data.data.user.email     : form.email,
+          phone:      data.data && data.data.user ? data.data.user.phone     : "+234" + form.phone,
+          userType:   data.data && data.data.user ? data.data.user.userType  : userType,
+          isVerified: data.data && data.data.user ? data.data.user.isVerified : true,
+          isApproved: data.data && data.data.user ? data.data.user.isApproved : undefined,
+        };
         localStorage.setItem("pickar_user", JSON.stringify(userData));
         window.dispatchEvent(new Event("pickar_auth"));
+
         setStep(4);
-        if (onSuccess) setTimeout(onSuccess, 1800);
+
+        const dest = userData.userType === "driver" ? "/dashboard/driver" : "/dashboard/user";
+        setTimeout(() => {
+          if (onSuccess) onSuccess();
+          router.push(dest);
+        }, 1800);
       } else {
         setOtpError(data.message || "Invalid OTP");
       }
@@ -309,79 +326,33 @@ export default function SignupForm({ onSuccess, onSwitchToLogin }) {
     } catch {}
   };
 
-  const handleLogin = () => {
-    if (onSwitchToLogin) onSwitchToLogin();
-  };
-
   if (step === 1) return (
     <div className={styles.formInner}>
       <h2 className={styles.cardTitle}>How do you want to register?</h2>
-
       <div className={styles.typeGrid}>
-        <button
-          type="button"
-          className={styles.typeCard + (userType === "user" ? " " + styles.typeActive : "")}
-          onClick={() => setUserType("user")}
-        >
-          <div className={styles.typeIcon + (userType === "user" ? " " + styles.typeIconActive : "")}>
-            <UserIcon />
-          </div>
-          <div className={styles.typeText}>
-            <strong>User</strong>
-            <span>Individual account for personal use</span>
-          </div>
-          <div className={styles.typeRadio}>
-            {userType === "user" && <div className={styles.typeRadioDot} />}
-          </div>
+        <button type="button" className={styles.typeCard + (userType === "user" ? " " + styles.typeActive : "")} onClick={() => setUserType("user")}>
+          <div className={styles.typeIcon + (userType === "user" ? " " + styles.typeIconActive : "")}><UserIcon /></div>
+          <div className={styles.typeText}><strong>User</strong><span>Individual account for personal use</span></div>
+          <div className={styles.typeRadio}>{userType === "user" && <div className={styles.typeRadioDot} />}</div>
         </button>
-
-        <button
-          type="button"
-          className={styles.typeCard + (userType === "driver" ? " " + styles.typeActive : "")}
-          onClick={() => setUserType("driver")}
-        >
-          <div className={styles.typeIcon + (userType === "driver" ? " " + styles.typeIconActive : "")}>
-            <DriverIcon />
-          </div>
-          <div className={styles.typeText}>
-            <strong>Driver</strong>
-            <span>Deliver a package and earn money</span>
-          </div>
-          <div className={styles.typeRadio}>
-            {userType === "driver" && <div className={styles.typeRadioDot} />}
-          </div>
+        <button type="button" className={styles.typeCard + (userType === "driver" ? " " + styles.typeActive : "")} onClick={() => setUserType("driver")}>
+          <div className={styles.typeIcon + (userType === "driver" ? " " + styles.typeIconActive : "")}><DriverIcon /></div>
+          <div className={styles.typeText}><strong>Driver</strong><span>Deliver a package and earn money</span></div>
+          <div className={styles.typeRadio}>{userType === "driver" && <div className={styles.typeRadioDot} />}</div>
         </button>
       </div>
-
-      <button className={styles.submitBtn} disabled={!userType} onClick={() => userType && setStep(2)}>
-        Register
-      </button>
-
-      <p className={styles.loginRow}>
-        Already have an account?{" "}
-        <button type="button" className={styles.loginLink} onClick={handleLogin}>Login</button>
-      </p>
-
-      <p className={styles.terms}>
-        By creating an account, you understand and agree to our{" "}
-        <a href="/terms" className={styles.termsLink}>Terms of Service</a>
-        {" "}and{" "}
-        <a href="/privacy" className={styles.termsLink}>Privacy Policy</a>
-      </p>
+      <button className={styles.submitBtn} disabled={!userType} onClick={() => userType && setStep(2)}>Register</button>
+      <p className={styles.loginRow}>Already have an account?{" "}<button type="button" className={styles.loginLink} onClick={() => onSwitchToLogin && onSwitchToLogin()}>Login</button></p>
+      <p className={styles.terms}>By creating an account, you understand and agree to our{" "}<a href="/terms" className={styles.termsLink}>Terms of Service</a>{" "}and{" "}<a href="/privacy" className={styles.termsLink}>Privacy Policy</a></p>
     </div>
   );
 
   if (step === 2) return (
     <div className={styles.formInner}>
-      <button type="button" className={styles.backBtn} onClick={() => setStep(1)}>
-        <BackIcon />
-      </button>
-
+      <button type="button" className={styles.backBtn} onClick={() => setStep(1)}><BackIcon /></button>
       <h2 className={styles.cardTitle}>Register Your Account</h2>
       <p className={styles.cardSub}>Fill in your details below to get started</p>
-
       {errors._api && <div className={styles.apiError}>{errors._api}</div>}
-
       <div className={styles.formScroll}>
         <TextField label="Full Name" placeholder="John Wilson" value={form.fullName} onChange={setField("fullName")} error={errors.fullName} />
         <TextField label="Email" type="email" placeholder="you@example.com" value={form.email} onChange={setField("email")} error={errors.email} />
@@ -395,96 +366,37 @@ export default function SignupForm({ onSuccess, onSwitchToLogin }) {
           </div>
         )}
       </div>
-
-      <button className={styles.submitBtn} disabled={loading} onClick={handleSignup}>
-        {loading ? <span className={styles.spinner} /> : "Create Account"}
-      </button>
-
-      <p className={styles.loginRow}>
-        Already have an account?{" "}
-        <button type="button" className={styles.loginLink} onClick={handleLogin}>Login</button>
-      </p>
-
-      <p className={styles.terms}>
-        By creating an account, you understand and agree to our{" "}
-        <a href="/terms" className={styles.termsLink}>Terms of Service</a>
-        {" "}and{" "}
-        <a href="/privacy" className={styles.termsLink}>Privacy Policy</a>
-      </p>
+      <button className={styles.submitBtn} disabled={loading} onClick={handleSignup}>{loading ? <span className={styles.spinner} /> : "Create Account"}</button>
+      <p className={styles.loginRow}>Already have an account?{" "}<button type="button" className={styles.loginLink} onClick={() => onSwitchToLogin && onSwitchToLogin()}>Login</button></p>
+      <p className={styles.terms}>By creating an account, you understand and agree to our{" "}<a href="/terms" className={styles.termsLink}>Terms of Service</a>{" "}and{" "}<a href="/privacy" className={styles.termsLink}>Privacy Policy</a></p>
     </div>
   );
 
   if (step === 3) return (
     <div className={styles.formInner}>
-      <button type="button" className={styles.backBtn} onClick={() => setStep(2)}>
-        <BackIcon />
-      </button>
-
+      <button type="button" className={styles.backBtn} onClick={() => setStep(2)}><BackIcon /></button>
       <div className={styles.otpIcon}>
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8B1A1A" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
           <polyline points="22,6 12,13 2,6"/>
         </svg>
       </div>
-
       <h2 className={styles.cardTitle}>Verify Your Email</h2>
-      <p className={styles.cardSub}>
-        We sent a 4-digit code to
-        <br />
-        <strong>{savedEmail}</strong>
-      </p>
-
+      <p className={styles.cardSub}>We sent a 4-digit code to<br /><strong>{savedEmail}</strong></p>
       <OTPInput value={otp} onChange={setOtp} />
-
       {otpError && <p className={styles.errMsg} style={{ textAlign: "center", marginTop: 8 }}>{otpError}</p>}
-
-      <button className={styles.submitBtn} disabled={loading || otp.length < 4} onClick={handleVerify}>
-        {loading ? <span className={styles.spinner} /> : "Verify & Continue"}
-      </button>
-
-      <p className={styles.resendRow}>
-        Didn&apos;t get the code?{" "}
-        <button
-          type="button"
-          className={styles.loginLink + (resendTimer > 0 ? " " + styles.resendDisabled : "")}
-          onClick={handleResend}
-          disabled={resendTimer > 0}
-        >
-          {resendTimer > 0 ? "Resend in " + resendTimer + "s" : "Resend"}
-        </button>
-      </p>
+      <button className={styles.submitBtn} disabled={loading || otp.length < 4} onClick={handleVerify}>{loading ? <span className={styles.spinner} /> : "Verify & Continue"}</button>
+      <p className={styles.resendRow}>Didn&apos;t get the code?{" "}<button type="button" className={styles.loginLink + (resendTimer > 0 ? " " + styles.resendDisabled : "")} onClick={handleResend} disabled={resendTimer > 0}>{resendTimer > 0 ? "Resend in " + resendTimer + "s" : "Resend"}</button></p>
     </div>
   );
 
   return (
     <div className={styles.formInner}>
       <div className={styles.successWrap}>
-        <div className={styles.successIcon}>
-          <CheckIcon />
-        </div>
+        <div className={styles.successIcon}><CheckIcon /></div>
         <h2 className={styles.cardTitle}>You&apos;re all set!</h2>
-        <p className={styles.cardSub}>
-          Your account has been created.
-          <br />
-          Download the app to get started.
-        </p>
-        <div className={styles.appBtns}>
-          <a href="#" className={styles.appBtn}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3.18 23.76c.3.17.65.19.96.08L13.68 12 3.01.14C2.7.03 2.35.06 2.06.24 1.48.6 1.16 1.24 1.16 2v20c0 .76.32 1.4.9 1.76z" fill="#4285F4"/>
-              <path d="M16.34 9.53l2.27-2.27-10.7-6.28L16.34 9.53z" fill="#EA4335"/>
-              <path d="M20.08 10.49L17.9 9.25l-2.27 2.27 2.27 2.27 2.21-1.29c.64-.38.64-1.28-.03-1.01z" fill="#FBBC05"/>
-              <path d="M16.34 14.47l-8.43 8.55 10.7-6.28-2.27-2.27z" fill="#34A853"/>
-            </svg>
-            Google Play
-          </a>
-          <a href="#" className={styles.appBtn}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-            </svg>
-            App Store
-          </a>
-        </div>
+        <p className={styles.cardSub}>Account created. Taking you to your dashboard...</p>
+        <div className={styles.spinner} style={{ width: 28, height: 28, margin: "16px auto 0", borderColor: "rgba(139,26,26,0.2)", borderTopColor: "#8B1A1A" }} />
       </div>
     </div>
   );
