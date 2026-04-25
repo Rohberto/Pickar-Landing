@@ -1,0 +1,271 @@
+/* ══════════════════════════════════════════
+   PROFILE PAGE
+   ══════════════════════════════════════════ */
+
+.profileWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Banner ── */
+.bannerWrap {
+  position: relative;
+  height: 200px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(128,0,0,0.15);
+}
+.bannerImg {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.bannerDefault {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #800000 0%, #500000 50%, #300000 100%);
+  position: relative;
+  overflow: hidden;
+}
+.bannerWave1, .bannerWave2, .bannerWave3 {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+}
+.bannerWave1 {
+  width: 600px; height: 350px;
+  background: #C0C0C0;
+  top: -100px; left: -100px;
+  animation: waveFloat 8s ease-in-out infinite;
+}
+.bannerWave2 {
+  width: 450px; height: 280px;
+  background: #fff;
+  top: 30px; right: -80px;
+  animation: waveFloat 6s ease-in-out infinite reverse;
+}
+.bannerWave3 {
+  width: 350px; height: 220px;
+  background: #C0C0C0;
+  bottom: -80px; left: 38%;
+  animation: waveFloat 10s ease-in-out infinite;
+}
+@keyframes waveFloat {
+  0%, 100% { transform: translateY(0) rotate(-15deg); }
+  50%       { transform: translateY(-24px) rotate(-15deg); }
+}
+.bannerEditBtn {
+  position: absolute;
+  bottom: 14px; right: 16px;
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.15s;
+}
+.bannerEditBtn:hover { background: rgba(0,0,0,0.65); }
+
+/* ── Info card (white card below banner) ── */
+.infoCard {
+  background: #D8D8D8;
+  border-radius: 20px;
+  border: 1px solid rgba(128,0,0,0.1);
+  box-shadow: 0 2px 16px rgba(128,0,0,0.06);
+  padding: 60px 32px 32px;
+}
+
+/* ── Avatar row ── */
+.avatarRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 0;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.avatarLeft {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+.avatarWrap {
+  position: relative;
+  width: 90px; height: 90px;
+  flex-shrink: 0;
+  margin-top: -56px;
+}
+.avatarImg {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #D8D8D8;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.avatarInitials {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: #800000;
+  color: #C0C0C0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  border: 4px solid #D8D8D8;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.avatarEditBtn {
+  position: absolute;
+  bottom: 4px; right: 4px;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: #800000;
+  border: 2.5px solid #D8D8D8;
+  color: #C0C0C0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; padding: 0;
+  transition: background 0.15s;
+  box-shadow: 0 2px 6px rgba(128,0,0,0.3);
+}
+.avatarEditBtn:hover { background: #600000; }
+
+.nameBlock {
+  padding-bottom: 6px;
+}
+.ratingRow {
+  display: flex; align-items: center; gap: 5px;
+  margin-bottom: 5px;
+}
+.ratingVal { font-size: 0.8rem; font-weight: 700; color: #F59E0B; }
+.profileName {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #800000;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.contactRow {
+  display: flex; align-items: center;
+  gap: 18px; flex-wrap: wrap;
+}
+.contactItem {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; color: #666;
+}
+
+/* ── Stats row ── */
+.statsRow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #fff;
+  border: 1px solid rgba(128,0,0,0.1);
+  border-radius: 14px;
+  padding: 18px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(128,0,0,0.04);
+}
+.statItem {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 5px;
+  padding: 0 28px;
+}
+.statNum {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #800000;
+  line-height: 1;
+}
+.statLbl { font-size: 0.72rem; color: #999; text-align: center; }
+.statDivider {
+  width: 1px; height: 44px;
+  background: rgba(128,0,0,0.12);
+}
+
+/* ── Tabs ── */
+.tabsWrap {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid rgba(128,0,0,0.08);
+  margin-bottom: 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabsWrap::-webkit-scrollbar { display: none; }
+.tabBtn {
+  padding: 12px 22px;
+  border: none; background: transparent;
+  font-size: 0.88rem; font-weight: 600;
+  color: #aaa; cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tabBtn:hover { color: #800000; }
+.tabBtnActive { color: #800000; border-bottom-color: #800000; }
+
+/* ── Fields grid — standalone rounded boxes ── */
+.fieldsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.fieldBox {
+  background: #fff;
+  border: 1px solid rgba(128,0,0,0.1);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.fieldBox:hover {
+  border-color: rgba(128,0,0,0.25);
+  box-shadow: 0 2px 12px rgba(128,0,0,0.06);
+}
+.fieldLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.fieldVal {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Verified pill */
+.verifiedPill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 12px; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 700;
+}
+.pillYes { background: #10B98115; color: #10B981; }
+.pillNo  { background: #EF444415; color: #EF4444; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .infoCard { padding: 0 18px 24px; }
+  .statsRow { padding: 14px 12px; }
+  .statItem { padding: 0 14px; }
+  .fieldsGrid { grid-template-columns: 1fr; gap: 12px; }
+  .avatarRow { flex-direction: column; align-items: flex-start; }
+  .statsRow { width: 100%; }
+}
+@media (max-width: 480px) {
+  .bannerWrap { height: 150px; }
+  .profileName { font-size: 1.15rem; }
+  .contactRow { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

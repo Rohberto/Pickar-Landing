@@ -1,0 +1,340 @@
+/* ══════════════════════════════════════════
+   WALLET PAGE
+   ══════════════════════════════════════════ */
+
+/* ── Top row ── */
+.topRow {
+  display: grid;
+  grid-template-columns: 360px 1fr auto;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: start;
+}
+
+/* ── Wallet card ── */
+.walletCard {
+  position: relative;
+  background: linear-gradient(135deg, #800000 0%, #500000 60%, #300000 100%);
+  border-radius: 20px;
+  padding: 24px 26px;
+  color: #fff;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 16px 48px rgba(128,0,0,0.35);
+}
+
+.walletGlow {
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,192,192,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.walletCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.walletChip { opacity: 0.8; }
+.walletLogoText {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #C0C0C0;
+  letter-spacing: 0.15em;
+}
+
+.walletBalance { margin-bottom: 24px; }
+.walletBalLabel {
+  font-size: 0.72rem;
+  color: rgba(192,192,192,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.walletBalVal {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.walletCardBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.walletDots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+}
+.walletLastDigits {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+}
+.walletCurrency {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #C0C0C0;
+  letter-spacing: 0.1em;
+}
+
+/* ── Stat mini cards ── */
+.statsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.statMini {
+  background: #D8D8D8;
+  border-radius: 14px;
+  padding: 14px 18px;
+  border: 1px solid rgba(128,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(128,0,0,0.05);
+}
+.statMiniTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.statMiniTrend {
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.statMiniVal {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #800000;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.statMiniLabel {
+  font-size: 0.72rem;
+  color: #888;
+}
+.sparkline {
+  width: 100px;
+  height: 40px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* ── Donut card ── */
+.donutCard {
+  background: #D8D8D8;
+  border-radius: 18px;
+  padding: 20px 22px;
+  border: 1px solid rgba(128,0,0,0.1);
+  box-shadow: 0 2px 16px rgba(128,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  min-width: 210px;
+}
+.donutCardTitle {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #800000;
+  align-self: flex-start;
+}
+.donut {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.donutCenter {
+  position: absolute;
+  text-align: center;
+}
+.donutPct {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #800000;
+  line-height: 1;
+}
+.donutLabel { font-size: 0.68rem; color: #aaa; margin-top: 2px; }
+
+.donutLegend { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.donutLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #555;
+}
+.donutDot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.donutLegendItem span { flex: 1; }
+.donutLegendItem strong { font-weight: 700; color: #333; font-size: 0.78rem; }
+
+/* Fund banner */
+.fundBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(128,0,0,0.08);
+  border: 1px solid rgba(128,0,0,0.15);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #800000;
+  width: 100%;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* ── Transaction table card ── */
+.txCard {
+  background: #D8D8D8;
+  border-radius: 18px;
+  padding: 20px 22px;
+  border: 1px solid rgba(128,0,0,0.1);
+  box-shadow: 0 2px 16px rgba(128,0,0,0.06);
+}
+.txCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.txCardTitle {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #800000;
+}
+.txCardSub { font-size: 0.75rem; color: #aaa; margin-top: 2px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; }
+.tab {
+  padding: 6px 14px;
+  border: none;
+  background: rgba(128,0,0,0.06);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.tab:hover { color: #555; }
+.tabActive { background: #800000; color: #fff; }
+.tabCount {
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  border-radius: 100px;
+  background: rgba(0,0,0,0.1);
+}
+.tabActive .tabCount { background: rgba(255,255,255,0.2); color: #fff; }
+
+/* Transaction table */
+.txTable { display: flex; flex-direction: column; }
+.txTableHead {
+  display: grid;
+  grid-template-columns: 1fr 120px 80px 120px;
+  padding: 8px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #800000;
+  border-bottom: 1px solid rgba(128,0,0,0.1);
+  margin-bottom: 4px;
+}
+.txRow {
+  display: grid;
+  grid-template-columns: 1fr 120px 80px 120px;
+  padding: 13px 12px;
+  border-bottom: 1px solid rgba(128,0,0,0.05);
+  align-items: center;
+  transition: background 0.12s;
+  border-radius: 8px;
+}
+.txRow:last-child { border-bottom: none; }
+.txRow:hover { background: rgba(128,0,0,0.04); }
+
+.txRowLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.txIcon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.txDesc { display: flex; flex-direction: column; gap: 3px; }
+.txDesc strong { font-size: 0.83rem; font-weight: 600; color: #333; }
+.txType {
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 100px;
+  width: fit-content;
+  text-transform: capitalize;
+}
+.txDate { font-size: 0.78rem; color: #666; }
+.txTime { font-size: 0.75rem; color: #aaa; }
+.txAmount { font-size: 0.88rem; font-weight: 700; text-align: right; }
+
+/* ── Empty / skeleton ── */
+.empty {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 48px 20px; gap: 12px;
+  color: #aaa; font-size: 0.82rem;
+}
+.skeletonList { display: flex; flex-direction: column; gap: 10px; }
+.skeleton {
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(128,0,0,0.06) 25%, rgba(128,0,0,0.1) 50%, rgba(128,0,0,0.06) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .topRow { grid-template-columns: 1fr 1fr; }
+  .walletCard { grid-column: 1 / -1; min-height: 180px; }
+  .donutCard { min-width: unset; }
+}
+@media (max-width: 700px) {
+  .topRow { grid-template-columns: 1fr; }
+  .walletCard { grid-column: auto; }
+  .txTableHead { grid-template-columns: 1fr 90px 100px; }
+  .txRow       { grid-template-columns: 1fr 90px 100px; }
+  .txTime { display: none; }
+  .txTableHead span:nth-child(3) { display: none; }
+}

@@ -5,7 +5,9 @@
 .shell {
   display: flex;
   min-height: 100vh;
-  background: #F5F0ED;
+  width: 100%;
+  overflow-x: hidden;
+  background: #C0C0C0;
   font-family: var(--font-body);
 }
 
@@ -13,7 +15,7 @@
 .sidebar {
   width: 240px;
   flex-shrink: 0;
-  background: #8B1A1A;
+  background: #800000;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -22,6 +24,7 @@
   bottom: 0;
   z-index: 100;
   transition: transform 0.3s ease;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.15);
 }
 
 .sidebarTop {
@@ -40,8 +43,10 @@
   font-family: var(--font-display);
   font-size: 1.3rem;
   font-weight: 800;
-  color: #fff;
+  color: #C0C0C0;
   letter-spacing: -0.02em;
+  border-bottom: 1px solid rgba(192,192,192,0.15);
+  margin-bottom: 12px;
 }
 .brandLogo {
   width: 30px;
@@ -63,7 +68,7 @@
   gap: 11px;
   padding: 11px 14px;
   border-radius: 10px;
-  color: rgba(255,255,255,0.6);
+  color: rgba(192,192,192,0.7);
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
@@ -71,12 +76,12 @@
   position: relative;
 }
 .navLink:hover {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
+  background: rgba(192,192,192,0.12);
+  color: #C0C0C0;
 }
 .navLinkActive {
-  background: rgba(255,255,255,0.15);
-  color: #fff;
+  background: rgba(192,192,192,0.18);
+  color: #C0C0C0;
   font-weight: 600;
 }
 .navIcon { flex-shrink: 0; display: flex; }
@@ -84,15 +89,15 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #fff;
+  background: #C0C0C0;
   margin-left: auto;
   flex-shrink: 0;
 }
 
-/* Sidebar bottom — user + logout */
+/* Sidebar bottom */
 .sidebarBottom {
   padding: 16px 12px 24px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(192,192,192,0.15);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -104,18 +109,26 @@
   gap: 10px;
   padding: 8px 10px;
 }
+.sidebarAvatarWrap { position: relative; flex-shrink: 0; }
 .sidebarAvatar {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  color: #fff;
+  background: rgba(192,192,192,0.2);
+  color: #C0C0C0;
   font-size: 0.75rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid rgba(192,192,192,0.3);
+}
+.sidebarAvatarImg {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .sidebarUserInfo {
   display: flex;
@@ -126,14 +139,14 @@
 .sidebarUserInfo strong {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #fff;
+  color: #C0C0C0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .sidebarUserInfo span {
   font-size: 0.72rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(192,192,192,0.5);
 }
 
 .logoutBtn {
@@ -142,9 +155,9 @@
   gap: 8px;
   padding: 10px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(192,192,192,0.2);
   background: none;
-  color: rgba(255,255,255,0.6);
+  color: rgba(192,192,192,0.6);
   font-size: 0.82rem;
   font-weight: 500;
   cursor: pointer;
@@ -152,8 +165,8 @@
   width: 100%;
 }
 .logoutBtn:hover {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
+  background: rgba(192,192,192,0.1);
+  color: #C0C0C0;
 }
 
 /* ── MAIN ── */
@@ -165,20 +178,20 @@
   min-height: 100vh;
 }
 
-/* Topbar */
+/* ── Topbar ── */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(245,240,237,0.92);
+  background: rgba(192,192,192,0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(139,26,26,0.08);
+  border-bottom: 1px solid rgba(128,0,0,0.12);
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 0 28px;
-  height: 64px;
+  gap: 12px;
+  padding: 0 24px;
+  height: 68px;
 }
 
 .menuBtn {
@@ -186,7 +199,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #8B1A1A;
+  color: #800000;
   padding: 4px;
   flex-shrink: 0;
 }
@@ -195,33 +208,231 @@
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 700;
-  color: #0A0A0A;
+  color: #800000;
   letter-spacing: -0.01em;
   flex: 1;
 }
 
-.topbarRight { display: flex; align-items: center; gap: 12px; }
+/* ── Date pill ── */
+.datePill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid rgba(128,0,0,0.12);
+  border-radius: 12px;
+  padding: 6px 14px;
+  flex-shrink: 0;
+}
+.dateDay {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #800000;
+  line-height: 1;
+}
+.dateMeta { display: flex; flex-direction: column; gap: 0; }
+.dateWeekday { font-size: 0.68rem; color: #999; font-weight: 500; line-height: 1.2; }
+.dateMonth   { font-size: 0.78rem; color: #800000; font-weight: 600; line-height: 1.2; }
+
+/* ── Search ── */
+.topbarSearch {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(128,0,0,0.1);
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 42px;
+}
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.85rem;
+  color: #333;
+}
+.searchInput::placeholder { color: #aaa; }
+
+/* ── Right icons ── */
+.topbarRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
 .topbarAvatar {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: #8B1A1A;
-  color: #fff;
-  font-size: 0.78rem;
+  background: #800000;
+  color: #C0C0C0;
+  font-size: 0.75rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.iconBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(128,0,0,0.15);
+  background: rgba(255,255,255,0.7);
+  color: #800000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.iconBtn:hover { background: #fff; border-color: rgba(128,0,0,0.3); }
 
-/* Content area */
+/* ── Avatar pill ── */
+.topbarAvatarWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 4px;
+  border-radius: 100px;
+  border: 1px solid rgba(128,0,0,0.15);
+  background: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  user-select: none;
+  flex-shrink: 0;
+}
+.topbarAvatarWrap:hover {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(128,0,0,0.1);
+}
+.topbarAvatarRing {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #800000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topbarAvatarImg {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.topbarName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #800000;
+  white-space: nowrap;
+}
+
+/* ── Avatar dropdown ── */
+.avatarDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 240px;
+  background: #fff;
+  border: 1px solid rgba(128,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(128,0,0,0.15);
+  z-index: 500;
+  overflow: hidden;
+  animation: dropIn 0.18s ease;
+}
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.dropProfile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #800000;
+}
+.dropAvatarLarge {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(192,192,192,0.2);
+  color: #C0C0C0;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible;
+  border: 2px solid rgba(192,192,192,0.3);
+}
+.dropAvatarImg {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.dropAvatarEdit {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #C0C0C0;
+  border: 2px solid #800000;
+  color: #800000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.dropName  { font-size: 0.85rem; font-weight: 700; color: #C0C0C0; }
+.dropEmail { font-size: 0.72rem; color: rgba(192,192,192,0.6); margin-top: 1px; }
+
+.dropDivider { height: 1px; background: #f0f0f0; }
+
+.dropItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #444;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+}
+.dropItem:hover { background: #f5f0f0; color: #800000; }
+.dropLogout { color: #800000; font-weight: 600; }
+.dropLogout:hover { background: #fff0f0 !important; }
+
+/* ── Content area ── */
 .content {
   flex: 1;
   padding: 28px;
   overflow-y: auto;
 }
 
-/* Mobile overlay */
+/* ── Mobile overlay ── */
 .sidebarOverlay {
   display: none;
   position: fixed;
@@ -230,17 +441,33 @@
   z-index: 99;
 }
 
-/* ── RESPONSIVE ── */
+/* ── Responsive ── */
 @media (max-width: 900px) {
-  .sidebar {
-    transform: translateX(-100%);
-  }
-  .sidebarOpen {
-    transform: translateX(0);
-  }
+  .sidebar { transform: translateX(-100%); }
+  .sidebarOpen { transform: translateX(0); }
   .sidebarOverlay { display: block; }
-  .main { margin-left: 0; }
+  .main {
+    margin-left: 0;
+    width: 100%;
+    min-width: 0;
+  }
+  .shell {
+    width: 100%;
+    overflow-x: hidden;
+  }
   .menuBtn { display: flex; }
-  .content { padding: 20px 16px; }
+  .content {
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
   .topbar { padding: 0 16px; }
+  .datePill { display: none; }
+  .iconBtn  { display: none; }
+  .topbarName { display: none; }
+}
+@media (max-width: 600px) {
+  .topbarSearch { display: none; }
+  .content { padding: 12px; }
 }

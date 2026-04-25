@@ -1,0 +1,396 @@
+/* ══════════════════════════════════════════
+   DELIVERIES PAGE
+   ══════════════════════════════════════════ */
+
+/* ── Top row ── */
+.topRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: start;
+}
+
+/* ── Card ── */
+.card {
+  background: #D8D8D8;
+  border-radius: 18px;
+  padding: 20px 22px;
+  border: 1px solid rgba(128,0,0,0.1);
+  box-shadow: 0 2px 16px rgba(128,0,0,0.06);
+  margin-bottom: 0;
+}
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #800000;
+}
+.cardSub { font-size: 0.75rem; color: #888; margin-top: 2px; }
+
+/* ── Donut ── */
+.donutSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 480px) {
+  .donutSection {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+  .donutLegend {
+    flex: 1;
+    gap: 12px;
+  }
+  .legendRow {
+    flex-wrap: nowrap;
+  }
+}
+.donut {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.donutCenter {
+  position: absolute;
+  text-align: center;
+}
+.donutTotal {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #800000;
+  line-height: 1;
+}
+.donutLabel { font-size: 0.68rem; color: #aaa; margin-top: 2px; }
+
+.donutLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.legendRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.legendBlock {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.legendInfo { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+.legendLabel { font-size: 0.75rem; color: #555; }
+.legendVal   { font-size: 0.82rem; font-weight: 700; color: #333; }
+.legendPct   { font-size: 0.72rem; font-weight: 600; color: #888; }
+
+/* ── Frequent locations ── */
+.freqList { display: flex; flex-direction: column; gap: 10px; }
+.freqItem { display: flex; align-items: center; gap: 12px; }
+.freqRank {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(128,0,0,0.1);
+  color: #800000;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.freqInfo { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.freqLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #333;
+  word-break: break-word;
+  line-height: 1.35;
+}
+.freqBarWrap { display: flex; align-items: center; gap: 8px; }
+.freqBar {
+  flex: 1; height: 5px;
+  background: rgba(128,0,0,0.1);
+  border-radius: 100px; overflow: hidden;
+}
+.freqBarFill { height: 100%; border-radius: 100px; transition: width 0.6s ease; }
+.freqCount { font-size: 0.68rem; font-weight: 700; color: #800000; white-space: nowrap; }
+
+/* ── Quick stats column ── */
+.statsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.miniStat {
+  background: #D8D8D8;
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(128,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 140px;
+}
+.miniStatIcon { font-size: 1.2rem; flex-shrink: 0; }
+.miniStatVal {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.miniStatLabel { font-size: 0.72rem; color: #888; margin-top: 2px; }
+
+/* ── Frequency map ── */
+.freqMapWrap {
+  position: relative;
+  height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e8e8e8;
+}
+.freqMap {
+  width: 100%;
+  height: 100%;
+  /* Force Leaflet tiles to render */
+  z-index: 1;
+}
+/* Leaflet internal fixes for Next.js */
+:global(.leaflet-container) {
+  width: 100% !important;
+  height: 100% !important;
+  background: #e8e8e8;
+  font-family: var(--font-body);
+}
+:global(.leaflet-tile-pane) { z-index: 2 !important; }
+:global(.leaflet-overlay-pane) { z-index: 4 !important; }
+:global(.leaflet-marker-pane) { z-index: 6 !important; }
+:global(.leaflet-popup-pane) { z-index: 7 !important; }
+:global(.leaflet-control) { z-index: 8 !important; }
+.freqMapLegend {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  gap: 14px;
+  font-size: 0.72rem;
+  color: #444;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+.freqMapLegendItem { display: flex; align-items: center; gap: 5px; font-weight: 500; }
+
+/* ── Table controls ── */
+.tableControls { display: flex; align-items: center; gap: 10px; }
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(128,0,0,0.12);
+  border-radius: 10px;
+  padding: 0 12px;
+  height: 36px;
+}
+.searchInput {
+  border: none; background: transparent;
+  outline: none; font-size: 0.82rem; color: #333; width: 180px;
+}
+.searchInput::placeholder { color: #bbb; }
+
+/* ── Tabs ── */
+.tabRow {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  background: rgba(128,0,0,0.06);
+  padding: 4px;
+  border-radius: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabRow::-webkit-scrollbar { display: none; }
+.tab {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+.tab:hover { color: #555; }
+.tabActive { background: #800000; color: #fff; box-shadow: 0 1px 6px rgba(128,0,0,0.2); }
+.tabCount {
+  background: rgba(0,0,0,0.08);
+  font-size: 0.68rem;
+  padding: 1px 6px;
+  border-radius: 100px;
+  min-width: 18px;
+  text-align: center;
+}
+.tabActive .tabCount { background: rgba(255,255,255,0.2); color: #fff; }
+
+/* ── Table ── */
+.tableWrap { overflow-x: auto; }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.table th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #800000;
+  border-bottom: 1px solid rgba(128,0,0,0.1);
+  white-space: nowrap;
+}
+.table td {
+  padding: 13px 12px;
+  border-bottom: 1px solid rgba(128,0,0,0.05);
+  color: #333;
+  vertical-align: middle;
+}
+.tableRow:last-child td { border-bottom: none; }
+.tableRow:hover td { background: rgba(128,0,0,0.03); }
+
+.orderId {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #800000;
+  background: rgba(128,0,0,0.08);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.destCell {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-weight: 600;
+  color: #333;
+  max-width: 200px;
+  word-break: break-word;
+  line-height: 1.35;
+}
+.pkgType {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(128,0,0,0.08);
+  color: #800000;
+  text-transform: capitalize;
+}
+.dateCell { display: flex; flex-direction: column; gap: 1px; }
+.timeCell { font-size: 0.7rem; color: #aaa; }
+
+.trackBtn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #800000;
+  background: rgba(128,0,0,0.1);
+  border: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.trackBtn:hover { background: rgba(128,0,0,0.18); }
+
+/* ── Status badge ── */
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.7rem; font-weight: 600;
+  padding: 3px 9px; border-radius: 100px;
+  white-space: nowrap; text-transform: capitalize;
+}
+.badgeDot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── Empty / skeleton ── */
+.empty {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 48px 20px; gap: 12px;
+  color: #aaa; font-size: 0.82rem;
+}
+.emptySmall { font-size: 0.78rem; color: #aaa; padding: 16px 0; text-align: center; }
+.skeletonList { display: flex; flex-direction: column; gap: 10px; }
+.skeleton {
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(128,0,0,0.06) 25%, rgba(128,0,0,0.1) 50%, rgba(128,0,0,0.06) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .topRow { grid-template-columns: 1fr 1fr; }
+  .statsCol { flex-direction: row; flex-wrap: wrap; grid-column: 1 / -1; }
+  .miniStat { flex: 1; min-width: 120px; }
+}
+@media (max-width: 700px) {
+  .topRow { grid-template-columns: 1fr; }
+  .donutSection { flex-direction: column; align-items: flex-start; }
+  .freqMapWrap { height: 240px; }
+}
+
+
+/* ── Mobile overflow fixes ── */
+@media (max-width: 900px) {
+  .topRow {
+    grid-template-columns: 1fr;
+  }
+  .statsCol {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .miniStat { flex: 1; min-width: 120px; }
+  .tableWrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table { min-width: 560px; }
+}
+
+
+/* ── Donut responsive ── */
+@media (max-width: 480px) {
+  .donut svg {
+    width: 110px !important;
+    height: 110px !important;
+  }
+  .donutTotal { font-size: 1.2rem; }
+  .legendLabel { font-size: 0.72rem; }
+  .legendVal   { font-size: 0.78rem; }
+  .legendPct   { font-size: 0.68rem; }
+}
