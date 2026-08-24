@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import styles from "../styles/Navbar.module.css";
 
@@ -207,12 +208,12 @@ export default function Navbar() {
             </div>
           ) : (
             /* ── HELP BUTTON (default, no user) ── */
-            <a href="#contact" className={styles.support}>
+            <Link href="/support" className={styles.support}>
               <img src="/images/chat.svg" alt="" aria-hidden="true"
                 className={styles.supportIcon}
                 onError={(e) => { e.currentTarget.style.display = "none"; }} />
               Help and support
-            </a>
+            </Link>
           )}
         </div>
 
@@ -289,13 +290,13 @@ export default function Navbar() {
             Sign out
           </button>
         ) : (
-          <a href="#contact" className={styles.drawerSupport}
+          <Link href="/support" className={styles.drawerSupport}
             onClick={() => setMenuOpen(false)}>
             <img src="/images/chat.svg" alt="" aria-hidden="true"
               className={styles.drawerSupportIcon}
               onError={(e) => { e.currentTarget.style.display = "none"; }} />
             Help and support
-          </a>
+          </Link>
         )}
       </aside>
     </>

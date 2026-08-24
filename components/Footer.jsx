@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "../styles/Footer.module.css";
@@ -111,7 +112,7 @@ export default function Footer() {
           </nav>
 
           {/* Help */}
-          <a href="#contact" className={styles.help}>
+          <Link href="/support" className={styles.help}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
               <circle cx="12" cy="12" r="10"/>
@@ -119,7 +120,7 @@ export default function Footer() {
               <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
             </svg>
             Help and Support
-          </a>
+          </Link>
         </div>
 
         {/* Divider line */}
@@ -129,7 +130,7 @@ export default function Footer() {
         <div ref={bottomRef} className={styles.bottom}>
           <p className={styles.copy}>
             All rights reserved. See our{" "}
-            <a href="#" className={styles.copyLink}>Privacy Policy</a>
+            <Link href="/privacy" className={styles.copyLink}>Privacy Policy</Link>
             {" "}and{" "}
             <a href="#" className={styles.copyLink}>Terms of Service</a>
           </p>
