@@ -2,20 +2,20 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import LegalSections from "../components/LegalSections";
-import privacySections from "../data/privacyContent";
+import termsSections from "../data/termsContent";
 import styles from "../styles/Legal.module.css";
 
-export default function Privacy() {
+export default function Terms() {
   return (
     <>
       <Head>
-        <title>Privacy Policy — Pickar</title>
+        <title>Terms of Service — Pickar</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Read Pickar's Privacy Policy to learn how we collect, use, and protect your personal information."
+          content="Read the Terms of Service governing your use of the Pickar mobile app, website, and delivery platform."
         />
-        <link rel="canonical" href="https://usepickar.com/privacy" />
+        <link rel="canonical" href="https://usepickar.com/terms" />
       </Head>
 
       <div className={styles.page}>
@@ -23,9 +23,9 @@ export default function Privacy() {
 
         <header className={styles.header}>
           <span className={styles.eyebrow}>Legal</span>
-          <h1 className={styles.title}>Privacy Policy</h1>
+          <h1 className={styles.title}>Terms of Service</h1>
           <p className={styles.subtitle}>
-            How Pickar Enterprises Limited collects, uses, and protects your personal data.
+            The terms governing your use of the Pickar mobile app, website, and delivery platform.
           </p>
         </header>
 
@@ -39,13 +39,14 @@ export default function Privacy() {
             <br />
             <strong>CAC Registration Number:</strong> RC8162047
             <br />
-            <strong>Registered Address:</strong> 24 Promiseland Road, So Easy Bustop, Ayobo, Lagos, Nigeria
-            <br />
-            <strong>Privacy Contact:</strong>{" "}
+            <strong>Customer Support:</strong>{" "}
             <a href="mailto:support@usepickar.com">support@usepickar.com</a>
+            <br />
+            <strong>Website:</strong>{" "}
+            <a href="https://www.usepickar.com">www.usepickar.com</a>
           </div>
 
-          <LegalSections sections={privacySections} />
+          <LegalSections sections={termsSections} />
         </div>
 
         <Footer />

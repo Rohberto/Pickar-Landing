@@ -132,7 +132,7 @@ export default function Footer() {
             All rights reserved. See our{" "}
             <Link href="/privacy" className={styles.copyLink}>Privacy Policy</Link>
             {" "}and{" "}
-            <a href="#" className={styles.copyLink}>Terms of Service</a>
+            <Link href="/terms" className={styles.copyLink}>Terms of Service</Link>
           </p>
 
           <div className={styles.socials}>

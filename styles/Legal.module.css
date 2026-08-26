@@ -66,6 +66,72 @@
   margin-bottom: 0.75rem;
 }
 
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0.25rem 0 0.5rem;
+}
+
+.subSection {
+  margin: -0.75rem 0 1.5rem;
+  padding-left: 0.25rem;
+  border-left: 2px solid var(--light-gray);
+  padding-left: 1rem;
+}
+
+.meta {
+  background: #fff;
+  border: 1px solid var(--light-gray);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: #333;
+}
+
+.meta strong {
+  color: var(--black);
+}
+
+.toc {
+  background: #fff;
+  border: 1px solid var(--light-gray);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.toc h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.tocGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 1.5rem;
+}
+
+.tocGrid a {
+  font-size: 0.85rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.tocGrid a:hover {
+  color: #8B1A1A;
+  text-decoration: underline;
+}
+
+@media (max-width: 560px) {
+  .tocGrid { grid-template-columns: 1fr; }
+}
+
 .section p {
   font-size: 0.95rem;
   line-height: 1.75;
